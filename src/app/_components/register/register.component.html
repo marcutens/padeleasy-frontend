@@ -1,0 +1,63 @@
+<h1 class="text-center mt-4">Register</h1>
+<hr>
+
+<div class="container-sm rounded-3 mt-4">
+    <form (ngSubmit)="register()">
+        <div class="mb-3 row justify-content-center">
+            <label class="col-sm-3 col-form-label text-end" for="username">Username:</label>
+            <div class="col-sm-4">
+                <input id="username" [(ngModel)]="user.username" name="username" type="text" required>
+            </div>
+        </div>
+        <div class="mb-3 row justify-content-center">
+            <label class="col-sm-3 col-form-label text-end" for="password">Password:</label>
+            <div class="col-sm-4">
+                <input id="password" [(ngModel)]="user.password" name="password" type="password" required>
+            </div>
+        </div>
+        <div class="mb-3 row justify-content-center">
+            <label class="col-sm-3 col-form-label text-end" for="firstName">First Name:</label>
+            <div class="col-sm-4">
+                <input id="firstName" [(ngModel)]="user.firstName" name="firstName" type="text" required>
+            </div>
+        </div>
+        <div class="mb-3 row justify-content-center">
+            <label class="col-sm-3 col-form-label text-end" for="lastName">Last Name:</label>
+            <div class="col-sm-4">
+                <input id="lastName" [(ngModel)]="user.lastName" name="lastName" type="text" required>
+            </div>
+        </div>
+        <div class="mb-3 row justify-content-center">
+            <label class="col-sm-3 col-form-label text-end" for="email">Email:</label>
+            <div class="col-sm-4">
+                <input id="email" [(ngModel)]="user.email" name="email" type="email" required>
+            </div>
+        </div>
+        <div class="mb-3 row justify-content-center">
+            <label class="col-sm-3 col-form-label text-end" for="phoneNumber">Phone Number:</label>
+            <div class="col-sm-4">
+                <input id="phoneNumber" [(ngModel)]="user.phoneNumber" name="phoneNumber" type="text">
+            </div>
+        </div>
+        <div class="mb-3 row justify-content-center">
+            <label class="col-sm-3 col-form-label text-end" for="city">City:</label>
+            <div class="col-sm-4">
+                <input id="city" [(ngModel)]="user.city" name="city" type="text">
+            </div>
+        </div>
+        <div class="mb-3 row justify-content-center">
+            <label class="col-sm-3 col-form-label text-end" for="role">Role:</label>
+            <div class="col-sm-4">
+                <div *ngFor="let role of roles">
+                    <input type="checkbox" [value]="role.id" (change)="onRoleChange(role, $event)"> {{ role.descriptionName }}
+                </div>
+            </div>
+        </div>
+        <div class="mb-3 row justify-content-center">
+            <div class="col-sm-3 d-flex justify-content-around">
+                <button class="btn btn-primary" type="submit">Register</button>
+            </div>
+        </div>
+    </form>
+</div>
+<p *ngIf="message">{{ message }}</p>

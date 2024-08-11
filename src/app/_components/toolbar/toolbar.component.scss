@@ -1,0 +1,39 @@
+.logo_padeleasy {
+    background-image: url('/assets/images/logo_padeleasy-removebg-preview.png');
+    background-repeat: no-repeat;
+    background-clip: border-box;
+    background-attachment: scroll;
+    background-color: rgba(0,0,0,0);
+    background-origin: padding-box;
+    background-position-x: 0px;
+    background-position-y: 0px;
+    width: 198px;
+    height: 80px;
+    background-position: 0 0;
+    background-size: 198px 80px;
+    padding: 0;
+    color: #ffffff;
+}
+
+.boton_lupa {
+    color: transparent;
+}
+
+.nav-link {
+    color: white; /* Color del texto por defecto */
+    text-decoration: none; /* Quitar subrayado por defecto */
+}
+
+.nav-link:hover {
+    color: #1391cb; /* Color del texto al pasar el ratón */
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.nav-item {
+    margin-right: 15px;
+}

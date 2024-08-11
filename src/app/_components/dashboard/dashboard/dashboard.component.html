@@ -1,0 +1,23 @@
+<h1>Dashboard</h1>
+<hr>
+<div *ngIf="userName">
+  <p>Welcome, {{ userName }}!</p>
+</div>
+
+<!-- Sección para ROLE_ADMIN -->
+<div *ngIf="showAdminInfo">
+  <h2>Admin Section</h2>
+  <p>This section is only visible to admins.</p>
+</div>
+
+<!-- Sección para ROLE_USER -->
+<div *ngIf="showUserInfo">
+  <h2>User Section</h2>
+  <p>This section is only visible to regular users.</p>
+</div>
+
+<!-- Sección para ROLE_COURT_ADMIN -->
+<div *ngIf="showCourtAdminInfo">
+  <h2>Court Admin Section</h2>
+  <p>This section is only visible to court administrators.</p>
+</div>
