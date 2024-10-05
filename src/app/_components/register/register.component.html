@@ -54,6 +54,17 @@
             </div>
         </div>
         <div class="mb-3 row justify-content-center">
+            <label class="col-sm-3 col-form-label text-end" for="level">Nivel de padel:
+                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#myModal"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"/>
+                  </svg></button>
+            </label>
+            <div class="col-sm-4">
+                <input id="level" [(ngModel)]="user.padelLevel" name="padelLevel" type="number">
+            </div>
+        </div>
+        <div class="mb-3 row justify-content-center">
             <div class="col-sm-3 d-flex justify-content-around">
                 <button class="btn btn-primary" type="submit">Register</button>
             </div>
@@ -61,3 +72,36 @@
     </form>
 </div>
 <p *ngIf="message">{{ message }}</p>
+
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+    
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Ayuda para elegir el nivel de padel</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+    
+          <!-- Modal body -->
+          <div class="modal-body">
+            <ul>
+                <li>Nivel iniciación: De 0 a 1.5 encontramos el nivel de iniciación, dónde se encuentran esos jugadores que empiezan a jugar a pádel por primera vez sin técnica ni táctica.</li>
+                <li>Iniciación intermedio: De 1.5 a 2.5 Playtomic clasifica a los jugadores que pelotean y devuelven la pelota a baja velocidad. Usuarios que juegan un par de partidos al mes y que han hecho pocas clases.</li>
+                <li>Intermedio: De 2.5 a 4.0 encontramos a los jugadores de nivel intermedio. Jugadores que casi dominan la mayoría de golpes. Aunque la escala determina que son jugadores de nivel intermedio, entre el 2.5 y el 3.5 encontramos jugadores de distinto nivel. Por ejemplo, con 3.5 el jugador ya juega cortado, liftado y plano y dirige la bola. En cambio, en 2.5 seguramente controlará las direcciones pero a un ritmo mucho más bajo.</li>
+                <li>Intermedio alto: De 4.0 a 5.0 Playtomic clasifica a jugadores que dominan el juego con una buena técnica y con un buen ritmo. No obstante, aún cometen algunos errores no forzados y les cuesta cerrar los puntos.</li>
+                <li>Alto Avanzado: Los jugadores con puntuación de 5.0 a 5.5. Un nivel que implica un dominio alto de la técnica y la táctica y preparados para jugar a buen ritmo.</li>
+                <li>Avanzado: De 5.5 a 6.0 Son los jugadores que están preparados para jugar partidos a ritmo alto. Son jugadores que dominan todos los golpes, la estrategia… Es menos consistente mental y físicamente que un jugador de élite o profesional.</li>
+                <li>Jugador profesional: Playtomic reserva la puntuación de 7.0 a los jugadores de élite.</li>
+            </ul>
+          </div>
+    
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+    
+        </div>
+      </div>
+</div>

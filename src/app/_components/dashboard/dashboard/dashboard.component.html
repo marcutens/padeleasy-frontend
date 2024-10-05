@@ -14,10 +14,30 @@
 <div *ngIf="showUserInfo">
   <h2>User Section</h2>
   <p>This section is only visible to regular users.</p>
+  <button (click)="goToReserveCourt()"> Reservar Pista</button>
 </div>
 
 <!-- Sección para ROLE_COURT_ADMIN -->
 <div *ngIf="showCourtAdminInfo">
   <h2>Court Admin Section</h2>
   <p>This section is only visible to court administrators.</p>
+  <button (click)="goToAddCourt()"> Añadir Pista </button>
+  <button (click)="goToDeleteCourt()"> Eliminar Pista</button>
 </div>
+
+<hr>
+
+<div *ngIf="showSearchResults; else originalList">
+  <h2>Resultados de Búsqueda</h2>
+    <div *ngFor="let court of searchResults" class="court-card">
+        <img *ngIf="court.img" [src]="court.img" alt="Imagen de la pista"/>
+        <h3>{{ court.nombre }}</h3>
+        <p>Ciudad: {{ court.ciudad }}</p>
+        <p>Latitud: {{ court.lat }}</p>
+        <p>Longitud: {{ court.lng }}</p>   
+    </div>
+</div>
+
+<ng-template #originalList>
+  <app-court></app-court>
+</ng-template>

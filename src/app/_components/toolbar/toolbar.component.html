@@ -19,9 +19,9 @@
                     <a class="nav-link" (click)="logout()">Logout</a>
                 </li>
             </ul>
-            <form class="d-flex" role="buscar">
+            <form class="d-flex" role="buscar" (ngSubmit)="search($event)">
                 <a *ngIf="username" class="btn btn-primary me-2" [routerLink]="['/user', username]">{{ username }}</a>
-                <input class="form-control me-2" type="text" placeholder="Buscar" (keyup)="search()" aria-label="Buscar">
+                <input [(ngModel)]="searchQuery" name="search" class="form-control me-2" type="text" placeholder="Buscar" aria-label="Buscar" required>
                 <button class="boton_lupa" type="submit"><img alt="Buscar" src=""/></button>
             </form>
         </div>

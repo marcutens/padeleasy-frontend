@@ -22,7 +22,8 @@ export class RegisterComponent implements OnInit{
     email: '',
     phoneNumber: '',
     city: '',
-    roles: []
+    roles: [],
+    padelLevel: 0
   };
   roles: Role[] = [];
   message: string = '';

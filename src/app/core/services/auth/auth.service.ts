@@ -5,19 +5,22 @@ import { BehaviorSubject, catchError, Observable, of, tap, throwError } from 'rx
 import { jwtDecode } from 'jwt-decode';
 import { Role } from '../../../_models/Role';
 import { UserRegisterObject } from '../../../_models/UserRegisterObject';
+import { Court } from '../../../_models/Court';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  //private backendURL = 'http://localhost:8080/api';
+  private backendURL = 'http://localhost:8080/api';
   //LOGIN_URL = this.backendURL + '/auth/login';
 
 
-  private LOGIN_URL = 'http://localhost:8080/api/auth';
-  private REGISTER_URL = 'http://localhost:8080/api/auth/register';
-  private USER_PROFILE_URL = 'http://localhost:8080/api/auth/user';
-  private ROLES_URL = 'http://localhost:8080/api/auth/roles'
+  private LOGIN_URL = this.backendURL + '/auth/login';
+  private REGISTER_URL = this.backendURL + '/auth/register';
+  private USER_PROFILE_URL = this.backendURL + '/user';
+  private ROLES_URL = this.backendURL + '/auth/roles';
+  private COURTS_URL =  this.backendURL + '/courts';
+  private LIST_COURT_URL = this.backendURL + '/list-court';
   private tokenKey = 'authToken';
   private userKey = 'authUser';
   private userNameSubject = new BehaviorSubject<string | null>(null);
@@ -27,9 +30,8 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     console.log("Holaa entre en la función del login. ", username);
-    return this.httpClient.post<any>(`${this.LOGIN_URL}/login`, { username, password }, { withCredentials: true }).pipe(
+    return this.httpClient.post<any>(`${this.LOGIN_URL}`, { username, password }, { withCredentials: true }).pipe(
       tap(response => {
-        console.log('Login response:', response); // Print the response
         if (response && response.accessToken) {
           this.setToken(response.accessToken);
           this.setUser(username);
@@ -54,11 +56,8 @@ export class AuthService {
   }
 
   register(user: UserRegisterObject): Observable<any> {
-    console.log(user);
     return this.httpClient.post<any>(this.REGISTER_URL, user).pipe(
       tap(response => {
-        console.log("Esta es la respuesta del back-end: ", response);
-        console.log("Y este es el token: ", response.token);
         this.setToken(response.token);
         this.setUser(user.username);
       }),
@@ -78,6 +77,18 @@ export class AuthService {
     return roles ? JSON.parse(roles) : [];
   }
 
+  private saveUserRoles(roles: Role[]): void {
+    localStorage.setItem('roles', JSON.stringify(roles));
+  }
+
+  hasRole(roleName: Role): boolean {
+    const userRoles = this.getUserRoles();
+    return userRoles.some(role => 
+      {
+        role.name === roleName.name
+        return role.name === roleName.name;
+      });
+  }
 
   private setToken(token: string): void{
     if (token) {
@@ -103,10 +114,6 @@ export class AuthService {
     return localStorage.getItem(this.userKey);
   }
 
-  private saveUserRoles(roles: Role[]): void {
-    localStorage.setItem('roles', JSON.stringify(roles));
-  }
-
   isAuthenticated(): boolean {
 
     const token = this.getToken();
@@ -116,18 +123,14 @@ export class AuthService {
       return false;
     }
 
-    console.log("Token:", token);
 
     try {
       const payload: any = jwtDecode(token); // Decodifica el token
-      console.log("Payload:", payload);
 
       const exp = payload.exp * 1000; // Expiración en milisegundos
-      console.log("Token expiration:", exp);
 
       // Verifica si el token ha expirado
       const isTokenValid = Date.now() < exp;
-      console.log("Is token valid?", isTokenValid);
 
       return isTokenValid;
 
@@ -154,6 +157,27 @@ export class AuthService {
 
   getRoles(): Observable<Role[]> {
     return this.httpClient.get<Role[]>(this.ROLES_URL);
+  }
+
+  addPista(pistaform: FormData): Observable<Court> {
+    return this.httpClient.post<Court>(this.COURTS_URL, pistaform);
+  }
+
+  getPistasPorCiudad(username: string | null): Observable<Court[]> {
+    return this.httpClient.get<Court[]>(`${this.LIST_COURT_URL}/${username}`);
+  }
+
+  getTodasPistas() {
+    return this.httpClient.get<Court[]>(`${this.LIST_COURT_URL}/all`);
+  }
+
+  deletePista(courtId: string){
+    return this.httpClient.delete<void>(`${this.LIST_COURT_URL}/delete/${courtId}`);
+  }
+
+  searchCourts(query: string): Observable<any> {
+    const encodedQuery = encodeURIComponent(query);
+    return this.httpClient.get<any[]>(`${this.LIST_COURT_URL}/search/${encodedQuery}`);
   }
 
 }

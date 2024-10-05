@@ -1,2 +1,2 @@
-<app-toolbar></app-toolbar>
+<app-toolbar (searchResultsEmitter)="handleSearchResults($event.event, $event.results)"></app-toolbar>
 <router-outlet></router-outlet>

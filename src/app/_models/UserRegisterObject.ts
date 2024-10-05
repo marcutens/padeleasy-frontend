@@ -7,4 +7,5 @@ export interface UserRegisterObject {
      phoneNumber: string;
      city: string;
      roles: number[];
+     padelLevel: number;
 }
