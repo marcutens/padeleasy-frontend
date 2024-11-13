@@ -2,15 +2,16 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { Role } from '../../../_models/Role';
-import { CourtComponent } from "../../../court/court.component";
-import { Router } from '@angular/router';
+import { CourtComponent } from "../../court/court.component";
+import { Router, RouterLink } from '@angular/router';
 import { Court } from '../../../_models/Court';
 import { ToolbarComponent } from '../../toolbar/toolbar.component';
+import { CourtsearchService } from '../../../_services/courtsearch.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, CourtComponent, ToolbarComponent],
+  imports: [RouterLink, CommonModule, CourtComponent, ToolbarComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -23,7 +24,7 @@ export class DashboardComponent implements OnInit {
   searchResults: Court[] = [];
   showSearchResults: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private courtSearchService: CourtsearchService) { }
 
   ngOnInit(): void {
     this.userName = this.authService.getUser();
@@ -35,7 +36,13 @@ export class DashboardComponent implements OnInit {
 
     this.showAdminInfo = this.roles.some(role => role.name === 'ROLE_ADMIN');
 
+    this.courtSearchService.searchResults$.subscribe((results) => {
+      this.searchResults = results;
+      this.showSearchResults = results.length > 0;
+    });
+
   }
+
 
   goToAddCourt(): void {
     this.router.navigate(['/add-court']);
@@ -45,8 +52,16 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/delete-court']);
   }
 
-  goToReserveCourt(): void {
-    this.router.navigate(['/reserve-court']);
+  goToListCourts(): void {
+    this.router.navigate(['/list-courts']);
+  }
+
+  goToListSetCourts(): void {
+    this.router.navigate(['/list-setcourts']);
+  }
+
+  goToDeleteSetCourt(): void {
+    this.router.navigate(['/delete-setcourt']);
   }
 
   onSearchResults(courts: Court[]) {

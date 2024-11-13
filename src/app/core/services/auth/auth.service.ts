@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, Observable, of, tap, throwError } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { Role } from '../../../_models/Role';
-import { UserRegisterObject } from '../../../_models/UserRegisterObject';
+import { User } from '../../../_models/User';
 import { Court } from '../../../_models/Court';
 
 @Injectable({
@@ -12,15 +12,15 @@ import { Court } from '../../../_models/Court';
 })
 export class AuthService {
   private backendURL = 'http://localhost:8080/api';
-  //LOGIN_URL = this.backendURL + '/auth/login';
+
 
 
   private LOGIN_URL = this.backendURL + '/auth/login';
   private REGISTER_URL = this.backendURL + '/auth/register';
   private USER_PROFILE_URL = this.backendURL + '/user';
   private ROLES_URL = this.backendURL + '/auth/roles';
-  private COURTS_URL =  this.backendURL + '/courts';
-  private LIST_COURT_URL = this.backendURL + '/list-court';
+  private COURTS_URL =  this.backendURL + '/court';
+  private LIST_COURT_URL = this.backendURL + '/court/list-court';
   private tokenKey = 'authToken';
   private userKey = 'authUser';
   private userNameSubject = new BehaviorSubject<string | null>(null);
@@ -55,7 +55,7 @@ export class AuthService {
     );
   }
 
-  register(user: UserRegisterObject): Observable<any> {
+  register(user: User): Observable<any> {
     return this.httpClient.post<any>(this.REGISTER_URL, user).pipe(
       tap(response => {
         this.setToken(response.token);
@@ -106,6 +106,17 @@ export class AuthService {
     return token;
   }
 
+  getUserIdFromToken(): number | null {
+    const token = localStorage.getItem(this.tokenKey);
+    console.log(token);
+    if (token) {
+      const decoded: any = jwtDecode(token);
+      console.log(decoded);
+      return decoded.userId || null;
+    }
+    return null;
+  }
+
   private setUser(user: string): void {
     localStorage.setItem(this.userKey, user);
   }
@@ -153,14 +164,6 @@ export class AuthService {
 
   getUserName(): Observable<string | null> {
     return this.userNameSubject.asObservable();
-  }
-
-  getRoles(): Observable<Role[]> {
-    return this.httpClient.get<Role[]>(this.ROLES_URL);
-  }
-
-  addPista(pistaform: FormData): Observable<Court> {
-    return this.httpClient.post<Court>(this.COURTS_URL, pistaform);
   }
 
   getPistasPorCiudad(username: string | null): Observable<Court[]> {

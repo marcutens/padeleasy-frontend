@@ -1,9 +1,11 @@
+import { Reserve } from "./Reserve";
+import { SetCourt } from "./SetCourts";
+
 export interface Court {
     id: number;
-    nombre: string;
-    ciudad: string;
-    lat: number;
-    lng: number;
-    img: string;
+    setCourt: SetCourt;
+    numberCourtInsideSetCourt: number;
+    setCourtName: string;
+    reserveList: Reserve[];
 }
   

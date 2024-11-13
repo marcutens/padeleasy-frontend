@@ -1,0 +1,18 @@
+.card-has-bg {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 300px;
+}
+
+.card-body {
+    background-color: rgba(0, 0, 0, 0.6); /* Oscurecer el fondo para mejorar legibilidad del texto */
+}
+
+.card-title, .card-text, .list-group-item {
+    color: #fff;
+}
+
+.bg-transparent {
+    background-color: transparent !important;
+}

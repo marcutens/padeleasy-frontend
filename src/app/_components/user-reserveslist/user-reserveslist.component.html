@@ -1,0 +1,46 @@
+<table *ngIf="userReserves.length > 0" class="table">
+    <thead>
+      <tr>
+        <th>Pista ID</th>
+        <th>Fecha</th>
+        <th>Duración</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reserve of userReserves">
+        <td>{{ reserve.courtId }}</td>
+        <td>{{ reserve.date }}</td>
+        <td>{{ reserve.duration }}</td>
+        <td>{{ reserve.status }}</td>
+        <td>
+            <button *ngIf="reserve.status === 'pendiente'" (click)="openConfirmationModal(reserve.id)">Confirmar</button>
+            <button (click)="openDeleteModal(reserve.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="userReserves.length === 0">
+      <p>No tienes reservas pendientes.</p>
+    </div>
+    
+    <!-- Modal de confirmación -->
+    <div *ngIf="isModalOpen" class="modal-overlay">
+      <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <h4>¿Confirmar reserva?</h4>
+        <button (click)="confirmReserve(selectedReserveId)">Sí</button>
+        <button (click)="closeModal()">No</button>
+      </div>
+    </div>
+
+    <div *ngIf="isDeleteModalOpen" class="modal-overlay">
+      <div class="modal-content">
+        <span class="close" (click)="closeDeleteModal()">&times;</span>
+        <h4>¿Eliminar reserva?</h4>
+        <p>Esta acción no se puede deshacer.</p>
+        <button (click)="deleteReserve()">Sí, eliminar</button>
+        <button (click)="closeDeleteModal()">No</button>
+      </div>
+    </div>

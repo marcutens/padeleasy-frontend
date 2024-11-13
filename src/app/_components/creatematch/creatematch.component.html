@@ -1,0 +1,35 @@
+<div class="container mt-4">
+    <h2 class="text-center">Crear Partido</h2>
+  
+    <form [formGroup]="partidoForm" (ngSubmit)="crearMatch()">
+      <div class="form-group">
+        <label for="fecha">Fecha</label>
+        <input type="date" id="fecha" class="form-control" formControlName="fecha" required>
+        <div *ngIf="partidoForm.get('fecha')?.invalid && (partidoForm.get('fecha')?.touched || partidoForm.get('fecha')?.dirty)">
+          <small class="text-danger">La fecha es obligatoria.</small>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="hora">Hora</label>
+        <input type="time" id="hora" class="form-control" formControlName="hora" required>
+        <div *ngIf="partidoForm.get('hora')?.invalid && (partidoForm.get('hora')?.touched || partidoForm.get('hora')?.dirty)">
+          <small class="text-danger">La hora es obligatoria.</small>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="pista">Seleccionar Pista</label>
+        <select id="pista" class="form-control" formControlName="pista" (change)="seleccionarPista($event.target)" required>
+          <option value="">Seleccione una pista</option>
+          <option *ngFor="let pista of courtsCloseToUser" [value]="pista.id"> {{ pista.setCourt.nombre }} - {{ pista.setCourt.ciudad }}</option>
+        </select>
+        <div *ngIf="partidoForm.get('pista')?.invalid && (partidoForm.get('pista')?.touched || partidoForm.get('pista')?.dirty)">
+          <small class="text-danger">Debes seleccionar una pista.</small>
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="partidoForm.invalid">Crear Partido</button>
+    </form>
+  </div>
+  

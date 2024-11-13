@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Court } from '../../_models/Court';
 import { AuthService } from '../../core/services/auth/auth.service';
 import { Reserve } from '../../_models/Reserve';
-import { CourtService } from '../../core/services/court.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ReserveService } from '../../_services/reserve.service';
+import { SetCourt } from '../../_models/SetCourts';
 
 @Component({
   selector: 'app-reserve-court',
@@ -14,15 +15,15 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './reserve-court.component.scss'
 })
 export class ReserveCourtComponent implements OnInit {
-  pistas: Court[] = [];
+  pistas: SetCourt[] = [];
   ciudadUsuario: string = '';
-  selectedPista: Court | null = null;
+  selectedPista: SetCourt | null = null;
   reservaFecha: string = '';
   reservaHora: string = '';
   username: string | null = '';
   userId: number = 0;
 
-  constructor(private courtService: CourtService, private authService: AuthService) {}
+  constructor(private reserveService: ReserveService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.username = this.authService.getUser();
@@ -44,7 +45,7 @@ export class ReserveCourtComponent implements OnInit {
   obtenerPistas(): void {
     this.authService.getPistasPorCiudad(this.username).subscribe({
       next: (data: Court[]) => {
-        this.pistas = data;
+        this.pistas = data.map(court => court.setCourt).filter(setCourt => setCourt !== undefined) as SetCourt[];
       },
       error: (error) => {
         console.error('Error al obtener las pistas:', error);
@@ -52,7 +53,7 @@ export class ReserveCourtComponent implements OnInit {
     });
   }
 
-  seleccionarPista(pista: Court): void {
+  seleccionarPista(pista: SetCourt): void {
     this.selectedPista = pista;
     console.log("He seleccionado la pista: ", this.selectedPista);
   }
@@ -68,7 +69,7 @@ export class ReserveCourtComponent implements OnInit {
         status: 'pendiente'
       };
 
-      this.courtService.reservarPista(nuevaReserva).subscribe({
+      this.reserveService.reservarPista(nuevaReserva).subscribe({
         next: () => {
           alert('Reserva realizada con éxito');
           this.resetForm();

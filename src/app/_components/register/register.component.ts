@@ -3,8 +3,9 @@ import { AuthService } from '../../core/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { UserRegisterObject } from '../../_models/UserRegisterObject';
+import { User } from '../../_models/User';
 import { Role } from '../../_models/Role';
+import { RoleService } from '../../_services/role.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ import { Role } from '../../_models/Role';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent implements OnInit{
-  user: UserRegisterObject = {
+  user: User = {
     username: '',
     password: '',
     firstName: '',
@@ -28,10 +29,10 @@ export class RegisterComponent implements OnInit{
   roles: Role[] = [];
   message: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private roleService: RoleService, private router: Router) {}
   
   ngOnInit(): void {
-    this.authService.getRoles().subscribe({
+    this.roleService.getRoles().subscribe({
       next: (response) => {
         this.roles = response;
       },
@@ -53,7 +54,7 @@ export class RegisterComponent implements OnInit{
   }
 
   register(): void {
-    const userToRegister: UserRegisterObject = { 
+    const userToRegister: User = { 
       ...this.user, 
       roles: Array.from(this.user.roles) 
     };
@@ -63,12 +64,11 @@ export class RegisterComponent implements OnInit{
         // Manejo del mensaje de éxito
         if (response === 'User registered successfully') {
           this.message = 'Registration successful! Redirecting to login page...';
-          // Redirige al usuario a la página de inicio de sesión
           setTimeout(() => {
             this.router.navigate(['/login']);
-          }, 2000); // Tiempo de espera de 2 segundos para mostrar el mensaje de éxito
+          }, 2000);
         } else {
-          this.message = response; // Muestra el mensaje de error si lo hubiera
+          this.message = response;
         }
       },
       error: (error) => {

@@ -1,0 +1,24 @@
+<table *ngIf="userMatches.length > 0" class="table">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Pista</th>
+        <th>Creador</th>
+        <th>Jugadores</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let match of userMatches">
+        
+        <td>{{ match.fecha }}</td>
+        <td>{{ match.hora }}</td>
+        <td>{{ match.pista.setCourt.nombre }}</td>
+        <td>{{ match.creador }}</td>
+        <td>{{ getNombresJugadores(match.jugadores) }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="userMatches.length === 0">
+      <p>No tienes partidos pendientes.</p>
+    </div>

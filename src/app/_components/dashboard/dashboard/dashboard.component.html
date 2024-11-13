@@ -1,43 +1,150 @@
-<h1>Dashboard</h1>
-<hr>
-<div *ngIf="userName">
-  <p>Welcome, {{ userName }}!</p>
-</div>
+<h1 class="text-center mt-4">Dashboard</h1>
+<br>
 
 <!-- Sección para ROLE_ADMIN -->
 <div *ngIf="showAdminInfo">
-  <h2>Admin Section</h2>
-  <p>This section is only visible to admins.</p>
+  <h2 class="text-center mt-4">Seccion de administrador</h2>
 </div>
 
 <!-- Sección para ROLE_USER -->
 <div *ngIf="showUserInfo">
-  <h2>User Section</h2>
-  <p>This section is only visible to regular users.</p>
-  <button (click)="goToReserveCourt()"> Reservar Pista</button>
+  <h2 class="text-center mt-4">Seccion de jugador de padel</h2>
+  <section class="wrapper">
+    <div class="container">
+      <div class="row text-center justify-content-center">
+        <div class="col-sm-12 col-md-3 col-lg-3" routerLink="/reserve-court">
+          <div class="card text-white card-has-bg click-col">
+            <div class="card-img-overlay d-flex flex-column">
+              <div class="card-body">
+                <h4 class="card-title mt-0 ">Reservar pista</h4>
+                <div class="card-text">
+                  <p>Reserva tu pista para jugar un partido</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-3 col-lg-3" routerLink="/reserve-list">
+          <div class="card text-white card-has-bg click-col">
+            <div class="card-img-overlay d-flex flex-column">
+              <div class="card-body">
+                <h4 class="card-title mt-0 "> Mis reservas </h4>
+                <div class="card-text">
+                  <p>Consulta tus reservas</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-3 col-lg-3" routerLink= "/create-match">
+          <div class="card text-white card-has-bg click-col">
+            <div class="card-img-overlay d-flex flex-column">
+              <div class="card-body">
+                <h4 class="card-title mt-0 ">Crear partido</h4>
+                <div class="card-text">
+                  <p>Crea tu propio partido de padel</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-3 col-lg-3" routerLink="/match-list">
+          <div class="card text-white card-has-bg click-col">
+            <div class="card-img-overlay d-flex flex-column">
+              <div class="card-body">
+                <h4 class="card-title mt-0 "> Ver partidos</h4>
+                <div class="card-text">
+                  <p>Ve los partidos de padel en los que te has apuntado</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-3 col-lg-3" routerLink= "/join-match">
+          <div class="card text-white card-has-bg click-col">
+            <div class="card-img-overlay d-flex flex-column">
+              <div class="card-body">
+                <h4 class="card-title mt-0 ">Unirse a un partido</h4>
+                <div class="card-text">
+                  <p>Únete a un partido de padel creado por otros usuarios</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <!-- Sección para ROLE_COURT_ADMIN -->
 <div *ngIf="showCourtAdminInfo">
-  <h2>Court Admin Section</h2>
-  <p>This section is only visible to court administrators.</p>
-  <button (click)="goToAddCourt()"> Añadir Pista </button>
-  <button (click)="goToDeleteCourt()"> Eliminar Pista</button>
-</div>
+  <h2 class="text-center mt-4">Seccion de administrador de pistas</h2>
+  <section class="wrapper">
+    <div class="container">
+      <div class="row text-center justify-content-center">
+        <div class="col-sm-12 col-md-3 col-lg-3" (click)="goToAddCourt()">
+          <div class="card text-white card-has-bg click-col">
+            <div class="card-img-overlay d-flex flex-column">
+              <div class="card-body">
+                <h4 class="card-title mt-0 "><a class="text-white" routerLink="/add-court">Añadir pista</a></h4>
+                <div class="card-text">
+                  <p>Añade una pista de pádel</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-<hr>
-
-<div *ngIf="showSearchResults; else originalList">
-  <h2>Resultados de Búsqueda</h2>
-    <div *ngFor="let court of searchResults" class="court-card">
-        <img *ngIf="court.img" [src]="court.img" alt="Imagen de la pista"/>
-        <h3>{{ court.nombre }}</h3>
-        <p>Ciudad: {{ court.ciudad }}</p>
-        <p>Latitud: {{ court.lat }}</p>
-        <p>Longitud: {{ court.lng }}</p>   
+        <div class="col-sm-12 col-md-3 col-lg-3" (click)="goToDeleteCourt()">
+          <div class="card text-white card-has-bg click-col">
+            <div class="card-img-overlay d-flex flex-column">
+              <div class="card-body">
+                <h4 class="card-title mt-0 "><a class="text-white" routerLink="/delete-court">Eliminar pista</a></h4>
+                <div class="card-text">
+                  <p>Elimina una pista de pádel</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-3 col-lg-3" (click)="goToListCourts()">
+          <div class="card text-white card-has-bg click-col">
+            <div class="card-img-overlay d-flex flex-column">
+              <div class="card-body">
+                <h4 class="card-title mt-0 "><a class="text-white" routerLink="/list-courts">Tus pistas</a></h4>
+                <div class="card-text">
+                  <p>Consulta tus pistas</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-3 col-lg-3" (click)="goToListSetCourts()">
+          <div class="card text-white card-has-bg click-col">
+            <div class="card-img-overlay d-flex flex-column">
+              <div class="card-body">
+                <h4 class="card-title mt-0 "><a class="text-white" routerLink="/list-setcourts">Tus conjuntos de pistas</a></h4>
+                <div class="card-text">
+                  <p>Consulta tus conjuntos de pistas</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-3 col-lg-3" (click)="goToDeleteSetCourt()">
+          <div class="card text-white card-has-bg click-col">
+            <div class="card-img-overlay d-flex flex-column">
+              <div class="card-body">
+                <h4 class="card-title mt-0 "><a class="text-white" routerLink="/delete-setcourt">Eliminar conjunto de pistas</a></h4>
+                <div class="card-text">
+                  <p>Elimina un conjunto de pistas de pádel</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 </div>
-
-<ng-template #originalList>
-  <app-court></app-court>
-</ng-template>

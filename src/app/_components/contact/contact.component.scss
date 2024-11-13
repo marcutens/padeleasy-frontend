@@ -1,0 +1,10 @@
+.contact-list {
+    list-style-position: inside; /* Mueve los puntos al interior del contenedor */
+    display: inline-block; /* Hace que la lista se comporte como un elemento en línea para centrarla */
+    text-align: left; /* Alinea el texto de los elementos de la lista a la izquierda */
+    padding: 0; /* Elimina el padding del ul si es necesario */
+}
+
+.text-center ul {
+    margin: 0 auto; /* Asegura que la lista esté centrada horizontalmente */
+}

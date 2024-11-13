@@ -1,0 +1,30 @@
+<h2 class="text-center">Tus Conjuntos de pistas de pádel</h2>
+<div class="container">
+  <!-- Comprobación de si hay pistas -->
+  <div *ngIf="conjunto_pistas.length > 0; else noPistas" class="pista-container">
+    <div *ngFor="let pista of conjunto_pistas" class="pista-card">
+
+      <img [src]="pista.img" class="pista-image">
+
+      <div class="pista-details">
+        <p><strong>Nombre:</strong> {{ pista.nombre }}</p>
+        <p><strong>Ciudad:</strong> {{ pista.ciudad }}</p>
+        <p><strong>Direccion:</strong> {{ pista.direccion }}</p>
+        
+        <h2>Pistas</h2>
+        <ul>
+            <li *ngFor="let p of pista.pistasDentroDelConjunto">
+            {{ p.setCourtName }}
+            </li>
+        </ul>
+
+        <button class="btn btn-primary" (click)="editarPista(pista.id)">Editar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Plantilla alternativa si no hay pistas disponibles -->
+  <ng-template #noPistas>
+    <p>No se han encontrado pistas en tu ciudad.</p>
+  </ng-template>
+</div>

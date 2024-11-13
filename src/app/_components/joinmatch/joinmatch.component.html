@@ -1,0 +1,37 @@
+<div class="container mt-4">
+    <h2 class="text-center">Partidos Disponibles</h2>
+    
+    <table *ngIf="partidosDisponibles.length > 0" class="table">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Pista</th>
+          <th>Creador</th>
+          <th>Jugadores</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let match of partidosDisponibles">
+          <td>{{ match.fecha }}</td>
+          <td>{{ match.hora }}</td>
+          <td>{{ match.pista.setCourt.nombre }}</td>
+          <td>{{ match.creador }}</td>
+          <td>{{ getNombresJugadores(match.jugadores) }}</td>
+          <td>
+            <button (click)="unirseAlPartido(match.id)">
+              Unirse
+            </button>
+            <button (click)="borrarseDelPartido(match.id)">
+                Borrarse
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="partidosDisponibles.length === 0" class="alert alert-info">
+      No hay partidos disponibles.
+    </div>
+  </div>
+  

@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { AuthService } from '../../core/services/auth/auth.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Court } from '../../_models/Court';
 import { FormsModule } from '@angular/forms';
+import { CourtsearchService } from '../../_services/courtsearch.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -19,7 +20,7 @@ export class ToolbarComponent implements OnInit{
   courts: any[] = [];
   @Output() searchResultsEmitter = new EventEmitter<{ event: Event, results: any[] }>();
 
-  constructor(public authService: AuthService) {
+  constructor(public authService: AuthService, private courtSearchService: CourtsearchService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -29,17 +30,7 @@ export class ToolbarComponent implements OnInit{
   }
 
   search(event: Event) {
-    console.log("Llego al search del toolbar: ", this.searchQuery);
-    this.authService.searchCourts(this.searchQuery).subscribe({
-      next: (data: any[]) => {
-        this.courts = data;
-        console.log("Estas son las pistas de la búsqueda ", this.courts);
-        this.searchResultsEmitter.emit({ event, results: this.courts});
-      },
-      error: (err) => {
-        console.error('Error en la búsqueda', err);
-      }
-    })
+    this.router.navigate(['/search-results'], { queryParams: { query: this.searchQuery}});
   }
 
   logout() {
