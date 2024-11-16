@@ -3,6 +3,6 @@ export interface Reserve{
   courtId: number;
   userId: number;
   date: string;
-  duration: string;
+  duration: number;
   status: string;
 }

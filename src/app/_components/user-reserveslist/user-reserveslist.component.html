@@ -11,7 +11,7 @@
     <tbody>
       <tr *ngFor="let reserve of userReserves">
         <td>{{ reserve.courtId }}</td>
-        <td>{{ reserve.date }}</td>
+        <td>{{ formatDate(reserve.date) }}</td>
         <td>{{ reserve.duration }}</td>
         <td>{{ reserve.status }}</td>
         <td>

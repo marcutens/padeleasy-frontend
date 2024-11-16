@@ -3,12 +3,9 @@
   <!-- Comprobación de si hay pistas -->
   <div *ngIf="pistas.length > 0; else noPistas" class="pista-container">
     <div *ngFor="let pista of pistas" class="pista-card" (click)="seleccionarPista(pista)">
-      <img [src]="pista.img" class="pista-image" alt="Imagen de la pista">
 
       <div class="pista-details">
-        <p><strong>Nombre:</strong> {{ pista.nombre }}</p>
-        <p><strong>Dirección:</strong> {{ pista.ciudad }}</p>
-        <p><strong>Latitud:</strong> {{ pista.direccion }}</p>
+        <p><strong>Nombre:</strong> {{ pista.setCourtName }}</p>
       </div>
     </div>
   </div>
@@ -20,13 +17,16 @@
 
   <!-- Formulario de reserva -->
    <div *ngIf="selectedPista" class="reserva-form">
-    <h3>Reservar Pista: {{ selectedPista.nombre }}</h3>
+    <h3>Reservar Pista: {{ selectedPista.setCourtName }}</h3>
     <form (ngSubmit)="reservarPista()">
         <label for="fecha">Fecha:</label>
         <input type="date" id="fecha" [(ngModel)]="reservaFecha" name="fecha" required>
+
+        <label for="hora">Hora:</label>
+        <input type="time" id="hora" [(ngModel)]="reservaHora" name="hora" required>
         
         <label for="duracion">Duración (en horas):</label>
-        <input type="text" id="duracion" [(ngModel)]="reservaHora" name="duracion" required>
+        <input type="number" id="duracion" [(ngModel)]="reservaDuracion" name="duracion" required>
         
         <button type="submit">Reservar</button>
     </form>
