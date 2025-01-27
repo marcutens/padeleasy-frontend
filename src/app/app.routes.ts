@@ -10,7 +10,6 @@ import { RoleResolverService } from './_services/role-resolver.service';
 import { ReserveCourtComponent } from './_components/reserve-court/reserve-court.component';
 import { AboutComponent } from './_components/about/about.component';
 import { ContactComponent } from './_components/contact/contact.component';
-import { CourtComponent } from './_components/court/court.component';
 import { CreatematchComponent } from './_components/creatematch/creatematch.component';
 import { UserReserveslistComponent } from './_components/user-reserveslist/user-reserveslist.component';
 import { UserMatcheslistComponent } from './_components/user-matcheslist/user-matcheslist.component';
@@ -18,6 +17,7 @@ import { JoinmatchComponent } from './_components/joinmatch/joinmatch.component'
 import { GlobalSearchResultComponent } from './_components/global-search-result/global-search-result.component';
 import { SetcourtComponent } from './_components/setcourt/setcourt.component';
 import { DeleteSetCourtComponent } from './_components/delete-setcourt/delete-setcourt.component';
+import { ReserveListSetCourtComponent } from './_components/reserve-list-set-court/reserve-list-set-court.component';
 
 export const routes: Routes = [
 
@@ -30,8 +30,7 @@ export const routes: Routes = [
     { path: 'add-court/:id', component: AddCourtComponent},
     { path: 'delete-court', component: DeleteCourtComponent},
     { path: 'delete-setcourt', component: DeleteSetCourtComponent},
-    { path: 'reserve-court', component: ReserveCourtComponent},
-    { path: 'list-courts', component: CourtComponent},
+    { path: 'reserve-court/:id', component: ReserveCourtComponent},
     { path: 'about', component: AboutComponent},
     { path: 'contact', component: ContactComponent},
     { path: 'create-match', component: CreatematchComponent},
@@ -39,5 +38,6 @@ export const routes: Routes = [
     { path: 'match-list', component: UserMatcheslistComponent},
     { path: 'join-match', component: JoinmatchComponent},
     { path: 'search-results', component: GlobalSearchResultComponent},
-    { path: 'list-setcourts', component: SetcourtComponent}
+    { path: 'list-setcourts', component: SetcourtComponent},
+    { path: 'reserve-listSetCourt', component: ReserveListSetCourtComponent}
 ];

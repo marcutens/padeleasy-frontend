@@ -15,12 +15,18 @@ import { Court } from '../../_models/Court';
   styleUrls: ['./add-court.component.scss']
 })
 export class AddCourtComponent implements OnInit {
-  conjunto_pista: SetCourt = { id: 0, nombre: '', ciudad: '', direccion: '', img: '', pistasDentroDelConjunto: []}; // Asegúrate de ajustar según el modelo
+  conjunto_pista: SetCourt = { id: 0, nombre: '', ciudad: '', direccion: '', img: '', 
+                               pistasDentroDelConjunto: [], precioDeReserva: 0,
+                               precioPorHoraConLuz: 0, precioPorHoraSinLuz: 0,
+                               precioPorHoraFinDeSemana: 0,
+                               horaActivacionLuz: ''}; // Asegúrate de ajustar según el modelo
   numberCourts: number = 0;
   selectedFile: File | null = null;
   previewUrl: string | ArrayBuffer | null = null;
   isEditing: boolean = false;
   pistaId: string | null = null;
+  horadeInicio: number = 0;
+  horadeFin: number = 0;
 
   constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute, private courtService: CourtService) {}
 
@@ -46,6 +52,13 @@ export class AddCourtComponent implements OnInit {
     formData.append('ciudad', this.conjunto_pista.ciudad);
     formData.append('direccion', this.conjunto_pista.direccion);
     formData.append('numberCourts', this.numberCourts.toString());
+    formData.append('precioDeReserva', this.conjunto_pista.precioDeReserva.toString());
+    formData.append('precioPorHoraConLuz', this.conjunto_pista.precioPorHoraConLuz.toString());
+    formData.append('precioPorHoraSinLuz', this.conjunto_pista.precioPorHoraSinLuz.toString());
+    formData.append('precioPorHoraFinDeSemana', this.conjunto_pista.precioPorHoraFinDeSemana.toString());
+    formData.append('horaActivacionLuz', this.conjunto_pista.horaActivacionLuz);
+    formData.append('horadeInicio', this.horadeInicio.toString());
+    formData.append('horadeFin', this.horadeFin.toString());
 
     console.log("Le he enviado ", this.numberCourts, " pistas.");
 

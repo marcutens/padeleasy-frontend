@@ -5,4 +5,5 @@ export interface Reserve{
   date: string;
   duration: number;
   status: string;
+  precio: number;
 }

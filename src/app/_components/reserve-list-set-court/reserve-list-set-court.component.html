@@ -1,0 +1,23 @@
+<h2>Reservar pistas de {{ ciudadUsuario }}</h2>
+<div class="container">
+  <!-- Comprobación de si hay pistas -->
+  <div *ngIf="pistas.length > 0; else noPistas" class="pista-container">
+    <div class="row">
+      <!-- Iteración sobre las pistas obtenidas, cada pista será una card -->
+      <div *ngFor="let pista of pistas" class="col-md-4 col-sm-6 mb-4">
+        <div class="card" (click)="seleccionarConjuntoPista(pista)">
+          <img [src]="pista.img" class="card-img-top" style="width: 100%; height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">{{ pista.nombre }}</h5>
+            <p class="card-text"><strong>Precio:</strong> {{ pista.precioDeReserva }} €</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Plantilla alternativa si no hay pistas disponibles -->
+  <ng-template #noPistas>
+    <p>No se han encontrado conjuntos de pistas en tu ciudad.</p>
+  </ng-template>
+</div>

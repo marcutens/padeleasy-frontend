@@ -85,7 +85,7 @@ export class CreatematchComponent implements OnInit {
         fecha: this.partidoForm.value.fecha,
         hora: this.partidoForm.value.hora,
         pista: this.selectedPista,
-        creador: this.user.id,
+        creador: this.user,
         jugadores: [this.user]
       };
 
@@ -95,7 +95,7 @@ export class CreatematchComponent implements OnInit {
       this.matchService.createMatch(nuevoMatch).subscribe({
         next: (response: any) => {
           console.log('Partido creado correctamente:', response);
-          this.router.navigate(['/matches']);
+          this.router.navigate(['/match-list']);
         },
         error: (error: any) => {
           console.error('Error al crear el partido:', error);

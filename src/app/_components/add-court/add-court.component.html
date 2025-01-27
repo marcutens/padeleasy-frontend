@@ -30,7 +30,56 @@
         <div class="col-sm-4">
           <input id="numberCourts" [(ngModel)]="numberCourts" (ngModelChange)="updatePistasDentroDelConjunto()" name="numberCourts" type="number" required>
         </div>
-    </div>
+      </div>
+
+      <div class="mb-3 row justify-content-center">
+        <label class="col-sm-3 col-form-label text-end" for="precioDeReserva">Precio:</label>
+        <div class="col-sm-4">
+          <input id="precioDeReserva" [(ngModel)]="conjunto_pista.precioDeReserva" name="precioDeReserva" type="number" required>
+        </div>
+      </div>
+
+      <div class="mb-3 row justify-content-center">
+        <label class="col-sm-3 col-form-label text-end" for="precioPorHoraConLuz">Precio por hora con luz:</label>
+        <div class="col-sm-4">
+          <input id="precioPorHoraConLuz" [(ngModel)]="conjunto_pista.precioPorHoraConLuz" name="precioPorHoraConLuz" type="number" required>
+        </div>
+      </div>
+
+      <div class="mb-3 row justify-content-center">
+        <label class="col-sm-3 col-form-label text-end" for="precioPorHoraSinLuz">Precio por hora sin luz:</label>
+        <div class="col-sm-4">
+          <input id="precioPorHoraSinLuz" [(ngModel)]="conjunto_pista.precioPorHoraSinLuz" name="precioPorHoraSinLuz" type="number" required>
+        </div>
+      </div>
+
+      <div class="mb-3 row justify-content-center">
+        <label class="col-sm-3 col-form-label text-end" for="precioPorHoraFinDeSemana">Precio por hora en fin de semana:</label>
+        <div class="col-sm-4">
+          <input id="precioPorHoraFinDeSemana" [(ngModel)]="conjunto_pista.precioPorHoraFinDeSemana" name="precioPorHoraFinDeSemana" type="number" required>
+        </div>
+      </div>
+
+      <div class="mb-3 row justify-content-center">
+        <label class="col-sm-3 col-form-label text-end" for="horaActivacionLuz">Horario de activación de la luz:</label>
+        <div class="col-sm-4">
+          <input id="horaActivacionLuz" [(ngModel)]="conjunto_pista.horaActivacionLuz" name="horaActivacionLuz" type="time" required>
+        </div>
+      </div>
+
+      <div class="mb-3 row justify-content-center">
+        <label class="col-sm-3 col-form-label text-end" for="horadeInicio">Horario de inicio de uso de las pistas:</label>
+        <div class="col-sm-4">
+          <input id="horadeInicio" [(ngModel)]="horadeInicio" name="horadeInicio" type="time" required>
+        </div>
+      </div>
+
+      <div class="mb-3 row justify-content-center">
+        <label class="col-sm-3 col-form-label text-end" for="horadeFin">Horario de finalización de uso de las pistas:</label>
+        <div class="col-sm-4">
+          <input id="horadeFin" [(ngModel)]="horadeFin" name="horadeFin" type="time" required>
+        </div>
+      </div>
 
 
       <div class="mb-3 row justify-content-center">

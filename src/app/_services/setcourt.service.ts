@@ -18,8 +18,23 @@ export class SetCourtService {
     return this.http.get<SetCourt[]>(`${this.apiUrl}/listAllMySetCourts?username=${username}`);
   }
 
+  getMisConjuntosdePistasPorId(id: string | null): Observable<SetCourt> {
+    return this.http.get<SetCourt>(`${this.apiUrl}/id/${id}`);
+  }
+
   deletePista(setcourtId: string){
     return this.http.delete<void>(`${this.apiUrl}/delete/${setcourtId}`);
+  }
+
+
+  getConjuntosPistasPorCiudad(username: string | null): Observable<SetCourt[]> {
+    console.log("El usuario es ", username);
+    return this.http.get<SetCourt[]>(`${this.apiUrl}/${username}`);
+  }
+
+  searchCourts(query: string): Observable<any> {
+    const encodedQuery = encodeURIComponent(query);
+    return this.http.get<any[]>(`${this.apiUrl}/search/${encodedQuery}`);
   }
 
   

@@ -1,35 +1,69 @@
-<h2>Reservar pistas de {{ ciudadUsuario }}</h2>
-<div class="container">
-  <!-- Comprobación de si hay pistas -->
-  <div *ngIf="pistas.length > 0; else noPistas" class="pista-container">
-    <div *ngFor="let pista of pistas" class="pista-card" (click)="seleccionarPista(pista)">
+<h2>Reservar pistas en {{ selectedSetPista?.nombre }}</h2>
 
-      <div class="pista-details">
-        <p><strong>Nombre:</strong> {{ pista.setCourtName }}</p>
+<form>
+  <label for="fecha">Fecha:</label>
+  <input type="date" id="fecha" [(ngModel)]="reservaFecha" name="fecha" required/>
+  <label for="hora">Hora:</label>
+  <input type="time" id="hora" [(ngModel)]="reservaHora" name="hora" required/>
+  <label for="duracion">Duración de la reserva (en horas):</label>
+  <input type="number" id="duracion" [(ngModel)]="reservaDuracion" name="duracion" (ngModelChange)="actualizarPistas()" required/>
+</form>
+
+<div *ngIf="pistasFiltradas.length > 0; else noPistas">
+  <h3>Pistas disponibles:</h3>
+  <div class="row">
+    <div
+      *ngFor="let pista of pistasFiltradas"
+      class="col-md-4"
+    >
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ pista.setCourtName }}</h5>
+          <p class="card-text">
+            Hora de apertura: {{ this.formatearHora(this.convertirHoraANumero(pista.horadeInicio)) }}<br />
+            Hora de cierre: {{ this.formatearHora(this.convertirHoraANumero(pista.horadeFin)) }}
+          </p>
+          <button class="btn btn-primary" (click)="seleccionarPista(pista)">Seleccionar</button>
+        </div>
       </div>
     </div>
   </div>
-  
-  <!-- Plantilla alternativa si no hay pistas disponibles -->
-   <ng-template #noPistas>
-    <p>No se han encontrado pistas en tu ciudad.</p>
-   </ng-template>
-
-  <!-- Formulario de reserva -->
-   <div *ngIf="selectedPista" class="reserva-form">
-    <h3>Reservar Pista: {{ selectedPista.setCourtName }}</h3>
-    <form (ngSubmit)="reservarPista()">
-        <label for="fecha">Fecha:</label>
-        <input type="date" id="fecha" [(ngModel)]="reservaFecha" name="fecha" required>
-
-        <label for="hora">Hora:</label>
-        <input type="time" id="hora" [(ngModel)]="reservaHora" name="hora" required>
-        
-        <label for="duracion">Duración (en horas):</label>
-        <input type="number" id="duracion" [(ngModel)]="reservaDuracion" name="duracion" required>
-        
-        <button type="submit">Reservar</button>
-    </form>
-    </div>
 </div>
 
+<ng-template #noPistas>
+  <p>No hay pistas disponibles para la hora seleccionada.</p>
+</ng-template>
+
+
+<!-- <div class="container"> -->
+  <!-- Mostrar pistas dentro del conjunto -->
+  <!-- <div *ngIf="selectedSetPista" class="pista-dentro-conjunto"> -->
+    <!-- <div *ngFor="let p of selectedSetPista.pistasDentroDelConjunto"  -->
+         <!-- class="pista-card"  -->
+         <!-- [class.selected]="p === selectedPista"  -->
+         <!-- (click)="seleccionarPista(p)"> -->
+      <!-- <p><strong>Nombre:</strong> {{ p.setCourtName }}</p> -->
+    <!-- </div> -->
+  <!-- </div> -->
+
+  <!-- Formulario de reserva -->
+  <!-- <div *ngIf="selectedPista" class="reserva-form">
+    <h3>Reservar Pista: {{ selectedPista.setCourtName }}</h3>
+    <form (ngSubmit)="reservarPista()">
+      <label for="fecha">Fecha:</label>
+      <input type="date" id="fecha" [(ngModel)]="reservaFecha" name="fecha" required>
+
+      <label for="hora">Hora:</label>
+      <input type="time" id="hora" [(ngModel)]="reservaHora" name="hora" required>
+      
+      <label for="duracion">Duración (en horas):</label>
+      <input type="number" id="duracion" [(ngModel)]="reservaDuracion" name="duracion" required>
+
+      <p><strong>Precio total:</strong> 
+        {{ calcularPrecioTotal() }} €
+      </p>
+      
+      <button type="submit">Reservar</button>
+    </form>
+  </div>
+</div> -->

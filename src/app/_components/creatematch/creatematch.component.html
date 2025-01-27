@@ -22,7 +22,7 @@
         <label for="pista">Seleccionar Pista</label>
         <select id="pista" class="form-control" formControlName="pista" (change)="seleccionarPista($event.target)" required>
           <option value="">Seleccione una pista</option>
-          <option *ngFor="let pista of courtsCloseToUser" [value]="pista.id"> {{ pista.setCourtName }}</option>
+          <option *ngFor="let pista of courtsCloseToUser" [value]="pista.id"> {{ pista.setCourt.nombre }} - {{ pista.setCourtName }}</option>
         </select>
         <div *ngIf="partidoForm.get('pista')?.invalid && (partidoForm.get('pista')?.touched || partidoForm.get('pista')?.dirty)">
           <small class="text-danger">Debes seleccionar una pista.</small>

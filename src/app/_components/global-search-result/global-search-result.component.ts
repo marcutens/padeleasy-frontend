@@ -8,6 +8,7 @@ import { UserService } from '../../_services/user.service';
 import { MatchService } from '../../_services/match.service';
 import { Match } from '../../_models/Match';
 import { SetCourt } from '../../_models/SetCourts';
+import { SetCourtService } from '../../_services/setcourt.service';
 
 @Component({
   selector: 'app-global-search-result',
@@ -31,7 +32,7 @@ import { SetCourt } from '../../_models/SetCourts';
     <div *ngIf="resultMatches.length>0">
       <h3>Partidos</h3>
       <ul>
-        <li *ngFor="let result of resultMatches"> <strong>Fecha</strong>: {{ result.fecha }}  <strong>Hora</strong>: {{ result.hora }}  <strong>Pista</strong>: {{ result.pista.setCourt.nombre }}, {{ result.pista.setCourt.ciudad }}</li>
+        <li *ngFor="let result of resultMatches"> <strong>Fecha</strong>: {{ result.fecha }}  <strong>Hora</strong>: {{ result.hora }}  <strong>Pista</strong>: {{ result.pista.setCourtName }} </li>
       </ul>
     </div>
   `
@@ -45,7 +46,8 @@ export class GlobalSearchResultComponent {
 
   constructor(private route: ActivatedRoute, 
               private authService: AuthService, 
-              private userService: UserService, 
+              private userService: UserService,
+              private setCourtService: SetCourtService, 
               private matchService: MatchService) {}
 
   ngOnInit() {
@@ -57,9 +59,9 @@ export class GlobalSearchResultComponent {
 
   performSearch() {
     if (this.query) {
-      this.authService.searchCourts(this.query).subscribe({
-        next: (data: Court[]) => {
-          this.resultsCourts = data.map(court => court.setCourt).filter(setCourt => setCourt !== undefined) as SetCourt[];
+      this.setCourtService.searchCourts(this.query).subscribe({
+        next: (data: SetCourt[]) => {
+          this.resultsCourts = data;
         },
         error: (err) => {
           console.error('Error en la búsqueda', err);

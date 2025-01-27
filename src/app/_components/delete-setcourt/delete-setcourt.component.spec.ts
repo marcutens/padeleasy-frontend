@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeleteSetcourtComponent } from './delete-setcourt.component';
+import { DeleteSetCourtComponent } from './delete-setcourt.component';
 
 describe('DeleteSetcourtComponent', () => {
-  let component: DeleteSetcourtComponent;
-  let fixture: ComponentFixture<DeleteSetcourtComponent>;
+  let component: DeleteSetCourtComponent;
+  let fixture: ComponentFixture<DeleteSetCourtComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DeleteSetcourtComponent]
+      imports: [DeleteSetCourtComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DeleteSetcourtComponent);
+    fixture = TestBed.createComponent(DeleteSetCourtComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

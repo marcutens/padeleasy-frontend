@@ -16,8 +16,8 @@
         <tr *ngFor="let match of partidosDisponibles">
           <td>{{ match.fecha }}</td>
           <td>{{ match.hora }}</td>
-          <td>{{ match.pista.setCourt.nombre }}</td>
-          <td>{{ match.creador }}</td>
+          <td>{{ match.pista.setCourtName }}</td>
+          <td>{{ match.creador.username }}</td>
           <td>{{ getNombresJugadores(match.jugadores) }}</td>
           <td>
             <button (click)="unirseAlPartido(match.id)">

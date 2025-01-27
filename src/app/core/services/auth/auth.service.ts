@@ -37,8 +37,6 @@ export class AuthService {
           this.setUser(username);
           this.setUserName(username);
           this.saveUserRoles(response.roles);
-        } else {
-          console.error('Token not found in response', response, response.accessToken);
         }
       }),
       catchError(error => {

@@ -6,6 +6,8 @@ export interface Court {
     setCourt: SetCourt;
     numberCourtInsideSetCourt: number;
     setCourtName: string;
+    horadeInicio: number;
+    horadeFin: number;
     reserveList: Reserve[];
 }
   

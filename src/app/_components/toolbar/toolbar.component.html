@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #cd7620;">
     <div class="container-fluid">
-        <a class="navbar-brand logo_padeleasy" href="{{url_app}}"></a>
+        <a class="navbar-brand logo_padeleasy" href="{{url_app}}" (click)="redirectToDashboard()"></a>
         <div class="navbar-collapse" *ngIf="authService.isAuthenticated()">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">

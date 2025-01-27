@@ -1,30 +1,40 @@
-<h2 class="text-center">Tus Conjuntos de pistas de pádel</h2>
+<h2 class="text-center mb-4">Tus Conjuntos de pistas de pádel</h2>
 <div class="container">
   <!-- Comprobación de si hay pistas -->
-  <div *ngIf="conjunto_pistas.length > 0; else noPistas" class="pista-container">
-    <div *ngFor="let pista of conjunto_pistas" class="pista-card">
+  <div *ngIf="conjunto_pistas.length > 0; else noPistas" class="row g-4">
+    <div *ngFor="let pista of conjunto_pistas" class="col-12 col-md-6 col-lg-4">
+      <!-- Card de pista -->
+      <div class="card shadow-sm h-100 d-flex flex-column">
+        <!-- Imagen de la pista -->
+        <div class="image-wrapper">
+          <img [src]="pista.img" class="card-img-top" alt="Imagen de la pista">
+        </div>
 
-      <img [src]="pista.img" class="pista-image">
+        <!-- Detalles de la pista -->
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title text-primary">{{ pista.nombre }}</h5>
+          <p class="card-text"><strong>Ciudad:</strong> {{ pista.ciudad }}</p>
+          <p class="card-text"><strong>Dirección:</strong> {{ pista.direccion }}</p>
 
-      <div class="pista-details">
-        <p><strong>Nombre:</strong> {{ pista.nombre }}</p>
-        <p><strong>Ciudad:</strong> {{ pista.ciudad }}</p>
-        <p><strong>Direccion:</strong> {{ pista.direccion }}</p>
-        
-        <h2>Pistas</h2>
-        <ul>
-            <li *ngFor="let p of pista.pistasDentroDelConjunto">
-            {{ p.setCourtName }}
-            </li>
-        </ul>
+          <!-- Número de pistas dentro del conjunto -->
+          <h6 class="mt-3 d-inline"><strong>Número de Pistas:</strong> <span class="fw-normal">{{ pista.pistasDentroDelConjunto.length }}</span></h6>
 
-        <button class="btn btn-primary" (click)="editarPista(pista.id)">Editar</button>
+
+          <!-- Botón para editar -->
+          <div class="mt-auto d-grid">
+            <button class="btn btn-primary btn-sm" (click)="editarPista(pista.id)">
+              Editar
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Plantilla alternativa si no hay pistas disponibles -->
   <ng-template #noPistas>
-    <p>No se han encontrado pistas en tu ciudad.</p>
+    <div class="text-center mt-4">
+      <p class="text-muted">No se han encontrado pistas en tu ciudad.</p>
+    </div>
   </ng-template>
 </div>

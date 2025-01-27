@@ -1,0 +1,6 @@
+.pista-row {
+    display: flex;
+    flex-direction: row; /* Alinear los elementos en fila horizontal */
+    gap: 20px; /* Espaciado entre tarjetas */
+    justify-content: flex-start; /* Las tarjetas se alinean hacia la izquierda */
+  }

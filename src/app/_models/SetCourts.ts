@@ -8,5 +8,10 @@ export interface SetCourt {
     direccion: string;
     img: string;
     pistasDentroDelConjunto: Court[];
+    precioDeReserva: number;
+    precioPorHoraConLuz: number;
+    precioPorHoraSinLuz: number;
+    precioPorHoraFinDeSemana: number;
+    horaActivacionLuz: string;
 }
   

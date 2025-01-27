@@ -44,8 +44,14 @@ export class UserMatcheslistComponent {
 
   loadUserMatches() {
     console.log("Aqui en loadMatches la id vale", this.userId);
-    this.matchService.getMatchesByUserId(this.userId).subscribe((matches) => {
-      this.userMatches = matches;
+    this.matchService.getMatchesByUserId(this.userId).subscribe({
+        next: (matches: Match[]) => {
+          console.log("Estos son los partidos: ", matches);
+          this.userMatches = matches;
+        },
+        error: (err) => {
+          console.error('Error al cargar los partidos', err);
+        }
     });
   }
 

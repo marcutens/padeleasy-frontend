@@ -4,6 +4,7 @@
         <th>Pista ID</th>
         <th>Fecha</th>
         <th>Duración</th>
+        <th>Precio</th>
         <th>Estado</th>
         <th>Acciones</th>
       </tr>
@@ -13,6 +14,7 @@
         <td>{{ reserve.courtId }}</td>
         <td>{{ formatDate(reserve.date) }}</td>
         <td>{{ reserve.duration }}</td>
+        <td>{{ reserve.precio }} €</td>
         <td>{{ reserve.status }}</td>
         <td>
             <button *ngIf="reserve.status === 'pendiente'" (click)="openConfirmationModal(reserve.id)">Confirmar</button>

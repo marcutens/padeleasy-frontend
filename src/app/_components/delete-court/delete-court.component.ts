@@ -27,6 +27,7 @@ export class DeleteCourtComponent {
     this.pistaService.getTodasPistas().subscribe({
       next: (data) => {
         this.pistas = data;
+        console.log(this.pistas);
       },
       error: (err) => {
         console.error('Error al cargar las pistas', err);

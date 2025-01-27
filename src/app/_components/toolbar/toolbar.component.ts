@@ -37,4 +37,14 @@ export class ToolbarComponent implements OnInit{
     this.username = null; // Limpiar el nombre de usuario al cerrar sesión
     this.authService.logout(); 
   }
+
+  redirectToDashboard() {
+    // Verificamos si no estamos en el login ni el register
+    const currentRoute = this.router.url;
+
+    if (!currentRoute.includes('login') && !currentRoute.includes('register')) {
+      this.router.navigate(['/dashboard']);  // Redirige a dashboard
+    }
+  }
+
 }

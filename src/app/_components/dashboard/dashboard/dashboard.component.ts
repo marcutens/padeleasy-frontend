@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { Role } from '../../../_models/Role';
-import { CourtComponent } from "../../court/court.component";
 import { Router, RouterLink } from '@angular/router';
 import { Court } from '../../../_models/Court';
 import { ToolbarComponent } from '../../toolbar/toolbar.component';
@@ -11,7 +10,7 @@ import { CourtsearchService } from '../../../_services/courtsearch.service';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterLink, CommonModule, CourtComponent, ToolbarComponent],
+  imports: [RouterLink, CommonModule, ToolbarComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -50,10 +49,6 @@ export class DashboardComponent implements OnInit {
 
   goToDeleteCourt(): void {
     this.router.navigate(['/delete-court']);
-  }
-
-  goToListCourts(): void {
-    this.router.navigate(['/list-courts']);
   }
 
   goToListSetCourts(): void {

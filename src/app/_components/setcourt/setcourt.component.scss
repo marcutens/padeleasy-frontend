@@ -1,0 +1,27 @@
+.card {
+    height: 100%; /* Asegura que todas las tarjetas tengan la misma altura */
+  }
+  
+  .image-wrapper {
+    height: 200px; /* Altura fija para la imagen */
+    overflow: hidden; /* Esconde el contenido sobrante */
+  }
+  
+  .card-img-top {
+    height: 100%; /* Ocupa todo el espacio de la imagen */
+    width: 100%; /* Ancho completo */
+    object-fit: cover; /* Ajusta la imagen manteniendo proporción */
+  }
+  
+  .card-body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  ul.list-unstyled {
+    margin-bottom: 0; /* Elimina márgenes adicionales */
+  }
+  
+  .mt-auto {
+    margin-top: auto; /* Empuja el botón al final de la tarjeta */
+  }
