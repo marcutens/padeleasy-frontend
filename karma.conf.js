@@ -10,11 +10,19 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://www.npmjs.com/search?q=keywords:karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', '@angular-devkit/build-angular'],
 
+    plugins: [
+      require('karma-jasmine'),
+      require('karma-chrome-launcher'),
+      require('karma-coverage'),
+      require('karma-jasmine-html-reporter'),
+      require('@angular-devkit/build-angular/plugins/karma')
+    ],
 
     // list of files / patterns to load in the browser
     files: [
+       './src/app/_components/add-court/add-court.component.spec.ts'
     ],
 
 
@@ -26,6 +34,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://www.npmjs.com/search?q=keywords:karma-preprocessor
     preprocessors: {
+      '**/*.ts': ['@angular-devkit/build-angular/karma']
     },
 
 
@@ -63,6 +72,8 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser instances should be started simultaneously
-    concurrency: Infinity
+    concurrency: Infinity,
+
+    restartOnFileChange: true,
   })
 }

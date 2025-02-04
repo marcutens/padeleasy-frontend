@@ -10,9 +10,9 @@
 <div *ngIf="showUserInfo">
   <h2 class="text-center mt-4">Seccion de jugador de padel</h2>
   <section class="wrapper">
-    <div class="container">
+    <div iclass="container">
       <div class="row text-center justify-content-center">
-        <div class="col-sm-12 col-md-3 col-lg-3 mt-3" routerLink="/reserve-listSetCourt">
+        <div id="reservapista" class="col-sm-12 col-md-3 col-lg-3 mt-3" routerLink="/reserve-listSetCourt">
           <div class="card text-white card-has-bg click-col">
             <div class="card-img-overlay d-flex flex-column">
               <div class="card-body">
@@ -83,7 +83,7 @@
   <section class="wrapper">
     <div class="container">
       <div class="row text-center justify-content-center">
-        <div class="col-sm-12 col-md-3 col-lg-3" (click)="goToAddCourt()">
+        <div id="add-court" class="col-sm-12 col-md-3 col-lg-3" (click)="goToAddCourt()">
           <div class="card text-white card-has-bg click-col">
             <div class="card-img-overlay d-flex flex-column">
               <div class="card-body">

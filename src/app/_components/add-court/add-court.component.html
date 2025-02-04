@@ -85,14 +85,14 @@
       <div class="mb-3 row justify-content-center">
         <label class="col-sm-3 col-form-label text-end" for="longitud">Imagen:</label>
         <div class="col-sm-4">
-          <input type="file" (change)="onFileSelected($event)" accept="image/*">
+          <input type="file" id="imagen" (change)="onFileSelected($event)" accept="image/*">
           <img *ngIf="previewUrl" [src]="previewUrl" alt="Vista previa de la imagen" width="200">
         </div>
       </div>
 
       <div class="mb-3 row justify-content-center">
         <div class="col-sm-3 d-flex justify-content-around">
-            <button class="btn btn-primary" type="submit">Añadir Pista</button>
+            <button id="add-pista" class="btn btn-primary" type="submit">Añadir Pista</button>
         </div>
       </div>
     </form>
