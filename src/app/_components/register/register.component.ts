@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/services/auth/auth.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { User } from '../../_models/User';
 import { Role } from '../../_models/Role';
@@ -26,20 +26,12 @@ export class RegisterComponent implements OnInit{
     roles: [],
     padelLevel: 0
   };
-  registerForm: FormGroup;
+
   roles: Role[] = [];
   message: string = '';
 
   constructor(private authService: AuthService, private roleService: RoleService, 
-    private router: Router, private fb: FormBuilder) {
-
-      this.registerForm = this.fb.group({
-        password: ['', [
-          Validators.minLength(8),
-          Validators.maxLength(64),
-          Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$')
-        ]]
-      });
+    private router: Router) {
       
   }
   
@@ -65,15 +57,8 @@ export class RegisterComponent implements OnInit{
     }
   }
 
-  get password() {
-    return this.registerForm.get('password');
-  }
 
   register(): void {
-    if (this.registerForm.invalid) {
-      this.message = 'Por favor, rellena los campos correctamente.';
-      return;
-    }
 
     const userToRegister: User = { 
       ...this.user, 
