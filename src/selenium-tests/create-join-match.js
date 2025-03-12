@@ -32,7 +32,7 @@ async function runTests() {
     await inputFieldcontra.clear();
 
     // Escribir un nuevo valor en el input
-    await inputFieldcontra.sendKeys('1234');
+    await inputFieldcontra.sendKeys('G7#mXq!29vP');
 
     console.log("He metido la contraseña");
 
